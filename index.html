@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f3eddf" />
+    <meta name="color-scheme" content="light" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="description" content="Conteo colectivo hasta el millón de chelas. Toma la foto de tu chela y súmala al conteo." />
+    <title>Millón de Chelas</title>
+    <!-- Vista previa de la liga en WhatsApp: og:image con URL absoluta (VITE_SITE_URL en .env). -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Millón de Chelas" />
+    <meta property="og:title" content="Millón de Chelas 🍺" />
+    <meta property="og:description" content="Un millón de chelas, entre todos. Cada chela tiene su número: sube la tuya." />
+    <meta property="og:locale" content="es_MX" />
+    <meta property="og:image" content="%VITE_SITE_URL%/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Chelas" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap"
+    />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <header class="top">
+      <h1 class="marca"><span class="marca-icono" aria-hidden="true">M<span>✳</span></span><span>Millón<br />de Chelas<span class="marca-punto">.</span></span></h1>
+      <span class="en-vivo" id="en-vivo" data-estado="conectando" role="status">Conectando</span>
+      <button class="instalar-top" id="instalar-top" type="button" hidden><span aria-hidden="true">📲</span> Instalar</button>
+      <button class="icono" id="abrir-ajustes" type="button" aria-label="Ajustes y reglas">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z" /><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z" /></svg>
+      </button>
+    </header>
+
+    <main class="app">
+      <div class="hero">
+        <section class="intro" aria-labelledby="reto-titulo">
+          <div>
+            <p class="eyebrow">Un grupo. Una misión.</p>
+            <h2 id="reto-titulo">Un millón.<br /><span>Entre todos.</span></h2>
+            <p class="intro-copy">Cada chela tiene su número.<br />La que sigue puede ser la tuya.</p>
+          </div>
+          <img class="brindis" src="/brindis.svg" alt="" width="240" height="230" />
+        </section>
+
+        <section class="marcador" aria-labelledby="marcador-titulo">
+          <!-- Cerveza que sube con el avance hacia el siguiente hito (main.ts → llenarCerveza). -->
+          <div class="cerveza" id="cerveza" aria-hidden="true">
+            <svg class="espuma espuma-atras" viewBox="0 0 400 24" preserveAspectRatio="none"><path d="M0 12 C 50 2, 50 2, 100 12 S 150 22, 200 12 S 250 2, 300 12 S 350 22, 400 12 V24 H0 Z" /></svg>
+            <svg class="espuma" viewBox="0 0 400 24" preserveAspectRatio="none"><path d="M0 12 C 50 22, 50 22, 100 12 S 150 2, 200 12 S 250 22, 300 12 S 350 2, 400 12 V24 H0 Z" /></svg>
+            <div class="cerveza-cuerpo">
+              <span class="burbuja"></span><span class="burbuja"></span><span class="burbuja"></span><span class="burbuja"></span><span class="burbuja"></span><span class="burbuja"></span><span class="burbuja"></span>
+            </div>
+          </div>
+          <div class="marcador-cabecera">
+            <p class="eyebrow" id="marcador-titulo">Así va el conteo colectivo</p>
+            <span class="contador-icono" aria-hidden="true">↗</span>
+          </div>
+          <p class="total" id="total" role="status" aria-live="polite" aria-label="Cargando conteo">—</p>
+          <p class="total-unidad">chelas sumadas</p>
+          <div class="meta-fila">
+            <p class="de-meta">La meta <strong id="meta">1,000,000</strong></p>
+            <p class="meta-porcentaje"><strong id="porcentaje">—</strong><span>del millón</span></p>
+          </div>
+          <div class="barra" role="progressbar" aria-label="Avance al millón" aria-valuemin="0" aria-valuemax="100" id="barra">
+            <span class="barra-relleno" id="barra-relleno"></span>
+          </div>
+        </section>
+      </div>
+
+      <section class="hito" aria-labelledby="hito-titulo">
+        <span class="hito-icono" aria-hidden="true">⚑</span>
+        <div class="hito-contenido">
+          <div class="hito-texto"><p class="eyebrow" id="hito-titulo"><span id="hito-etiqueta">Siguiente hito</span> <b id="hito-meta">—</b></p><p id="siguiente">Cargando conteo…</p></div>
+          <div class="hito-barra" id="hito-barra" role="progressbar" aria-label="Avance entre el hito anterior y el siguiente" aria-valuemin="0" aria-valuemax="100"><span id="hito-relleno"></span></div>
+          <div class="hito-escala"><span id="hito-desde">—</span><span id="hito-hasta">—</span></div>
+        </div>
+      </section>
+
+      <!-- Instalar la app (o, ya instalada, activar avisos de metas). pwa.ts decide qué muestra. -->
+      <section class="instalar-card" id="instalar-card" hidden>
+        <span class="instalar-icono" aria-hidden="true">📲</span>
+        <div class="instalar-copy"><b id="instalar-titulo">Llévala en tu pantalla de inicio</b><span id="instalar-texto"></span></div>
+        <button class="boton-chico" id="instalar-abrir" type="button">Instalar</button>
+        <button class="cerrar-mini" id="instalar-cerrar" type="button" aria-label="Ahora no">×</button>
+      </section>
+
+      <div class="comunidad-cabecera"><h2>El álbum del millón<span>.</span></h2><span>Hecho entre todos</span></div>
+      <nav class="tabs" role="tablist" aria-label="Secciones">
+        <button role="tab" id="tab-fotos" aria-selected="true" aria-controls="panel-fotos" type="button">Últimas chelas</button>
+        <button role="tab" id="tab-ranking" aria-selected="false" aria-controls="panel-ranking" type="button">Ranking del grupo</button>
+      </nav>
+
+      <section id="panel-fotos" role="tabpanel" aria-labelledby="tab-fotos">
+        <!-- Mis fotos que aún no salen en el álbum (revisando, en revisión o rechazadas). -->
+        <div class="mis-revisiones" id="mis-revisiones" hidden></div>
+        <div class="fotos" id="fotos"></div>
+        <div class="vacio album-vacio" id="fotos-vacio" hidden><span class="album-sello" aria-hidden="true">+<svg viewBox="0 0 32 32"><rect x="5" y="9" width="22" height="17" rx="3"/><path d="m11 9 2-4h6l2 4"/><circle cx="16" cy="17" r="5"/></svg></span><div><h3>La primera foto es historia.</h3><p>El conteo ya empezó en el grupo.<br />Estrena el álbum con tu chela.</p><button class="enlace" id="estrenar" type="button">Subir la primera foto <span aria-hidden="true">↗</span></button></div></div>
+        <button class="boton-sec mas" id="ver-mas" type="button" hidden>Ver más fotos</button>
+      </section>
+
+      <section id="panel-ranking" role="tabpanel" aria-labelledby="tab-ranking" hidden>
+        <div class="segmentos" role="group" aria-label="Qué ranking">
+          <button type="button" data-tipo="personas" aria-pressed="true">Cheleros</button>
+          <button type="button" data-tipo="marcas" aria-pressed="false">Marcas</button>
+        </div>
+        <div class="segmentos" role="group" aria-label="Periodo">
+          <button type="button" data-periodo="hoy" aria-pressed="true">Hoy</button>
+          <button type="button" data-periodo="semana" aria-pressed="false">Semana</button>
+          <button type="button" data-periodo="siempre" aria-pressed="false">Siempre</button>
+        </div>
+        <ol class="ranking" id="ranking"></ol>
+        <p class="vacio" id="ranking-vacio" hidden>Nadie ha sumado en este periodo… todavía.</p>
+        <p class="nota" id="ranking-nota">El ranking cuenta solo las fotos aprobadas en la app.</p>
+      </section>
+    </main>
+
+    <div class="accion">
+      <div class="accion-copy"><b>Tu chela también cuenta.</b><span>Foto, tamaño y listo.</span></div>
+      <button class="sumar" id="sumar" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h1.6l1.2-1.8A1.5 1.5 0 0 1 10.5 3.5h3a1.5 1.5 0 0 1 1.2.7L15.9 6h1.6A2.5 2.5 0 0 1 20 8.5v8a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 16.5Z" /><circle cx="12" cy="12.5" r="3.6" /></svg>
+        <span>Sumar mi chela</span><span class="sumar-flecha" aria-hidden="true">↗</span>
+      </button>
+      <input id="archivo" type="file" accept="image/*" hidden />
+    </div>
+
+    <div class="toasts" id="toasts" aria-live="polite"></div>
+    <div class="fiesta" id="fiesta" aria-hidden="true"></div>
+
+    <!-- Registrar: foto, tamaño, cuántas y nombre. -->
+    <dialog class="hoja" id="dlg-registrar" aria-labelledby="registrar-titulo">
+      <form class="hoja-cuerpo" id="form-registrar" method="dialog">
+        <button class="cerrar" type="button" data-cerrar aria-label="Cerrar">×</button>
+        <h2 id="registrar-titulo">Sumar chela</h2>
+
+        <button class="preview" id="preview" type="button" aria-label="Cambiar foto">
+          <img id="preview-img" alt="Tu foto" hidden />
+          <span class="preview-vacio" id="preview-vacio">📸<br />Toca para tomar la foto</span>
+          <span class="preview-cambiar" id="preview-cambiar" hidden>Cambiar foto</span>
+        </button>
+
+        <fieldset class="tamanos">
+          <legend>¿Qué te estás tomando?</legend>
+          <div class="chips" id="chips"></div>
+          <label class="otra" id="otra" hidden>
+            <span>Mililitros</span>
+            <input id="otra-ml" type="number" inputmode="numeric" min="250" max="5000" step="1" placeholder="Ej. 710" />
+          </label>
+        </fieldset>
+
+        <div class="fila">
+          <span class="fila-titulo">¿Cuántas en la foto?</span>
+          <div class="stepper">
+            <button type="button" id="menos" aria-label="Una menos">−</button>
+            <output id="cantidad">1</output>
+            <button type="button" id="mas" aria-label="Una más">+</button>
+          </div>
+        </div>
+
+        <p class="sumando-como">Sumando como <b id="sumando-nombre">—</b> <button class="enlace" id="cambiar-perfil" type="button">Cambiar</button></p>
+
+        <p class="error" id="registrar-error" role="alert"></p>
+
+        <button class="boton" id="enviar" type="submit" disabled>Elige foto y tamaño</button>
+      </form>
+    </dialog>
+
+    <!-- Resultado: la IA revisa la foto (revisando) y queda aprobada (número + tarjeta para el
+         grupo), en revisión de un admin o rechazada. data-estado en .salud elige qué se ve. -->
+    <dialog class="hoja" id="dlg-salud" aria-labelledby="salud-titulo">
+      <div class="hoja-cuerpo salud" id="salud" data-estado="revisando">
+        <button class="cerrar" type="button" data-cerrar aria-label="Cerrar">×</button>
+        <div class="escaner" id="salud-escaner" aria-hidden="true"><img id="salud-foto" alt="" /><span class="escaner-linea"></span></div>
+        <p class="eyebrow" id="salud-eyebrow">Un momento</p>
+        <h2 id="salud-titulo" class="salud-numero" aria-live="polite">Revisando…</h2>
+        <p class="salud-texto" id="salud-texto"></p>
+        <div class="ia-ficha" id="salud-ia" hidden></div>
+        <img class="salud-tarjeta" id="salud-tarjeta" alt="Tu foto con el número" hidden />
+        <button class="boton" id="compartir" type="button" hidden>Mandar al grupo 📲</button>
+        <button class="boton-sec" type="button" data-cerrar>Listo</button>
+      </div>
+    </dialog>
+
+    <!-- Detalle de una foto. -->
+    <dialog class="hoja" id="dlg-foto" aria-labelledby="foto-titulo">
+      <div class="hoja-cuerpo detalle">
+        <button class="cerrar" type="button" data-cerrar aria-label="Cerrar">×</button>
+        <img class="detalle-img" id="detalle-img" alt="" />
+        <h2 id="foto-titulo" class="detalle-num"></h2>
+        <p class="detalle-info" id="detalle-info"></p>
+        <div class="ia-ficha" id="detalle-ia" hidden></div>
+        <button class="boton-peligro" id="borrar" type="button" hidden>Borrar foto</button>
+      </div>
+    </dialog>
+
+    <!-- Ajustes: reglas, nombre y liga al panel de admin. -->
+    <dialog class="hoja" id="dlg-ajustes" aria-labelledby="ajustes-titulo">
+      <div class="hoja-cuerpo">
+        <button class="cerrar" type="button" data-cerrar aria-label="Cerrar">×</button>
+        <h2 id="ajustes-titulo">Reglas del conteo</h2>
+        <ul class="reglas">
+          <li><b>250 – 599 ml</b><span>= 1 chela</span></li>
+          <li><b>Desde 600 ml</b><span>+1 cada 300 ml</span></li>
+          <li><b>Vaso de concierto</b><span>×2</span></li>
+          <li><b>Caguama (940 ml)</b><span>×3</span></li>
+          <li><b>Caguamón (1.2 L)</b><span>×4</span></li>
+        </ul>
+        <p class="nota">No cuentan: menos de 250 ml, cerveza 0% ni otras bebidas. Cada foto la revisa una IA: si no es cerveza o no cuadra lo que declaraste, pasa con un admin.</p>
+
+        <h3>Tu perfil</h3>
+        <div class="perfil-resumen">
+          <div><b id="ajustes-nombre">Sin nombre chelero</b><small id="ajustes-tel"></small></div>
+          <button class="boton-chico" id="editar-perfil" type="button">Editar</button>
+        </div>
+
+        <h3>Avisos de metas</h3>
+        <div class="perfil-resumen">
+          <div><span id="avisos-estado"></span></div>
+          <button class="boton-chico" id="avisos-boton" type="button">Activar</button>
+        </div>
+        <p class="nota" id="avisos-nota"></p>
+
+        <button class="enlace" id="abrir-guia" type="button">Instalar la app en tu celular <span aria-hidden="true">↗</span></button>
+        <a class="enlace" href="/privacidad">Aviso de privacidad <span aria-hidden="true">↗</span></a>
+
+        <a class="enlace admin-liga" href="/admin">Panel de admin <span aria-hidden="true">↗</span></a>
+      </div>
+    </dialog>
+
+    <!-- Perfil: nombre chelero (único) y teléfono opcional. -->
+    <dialog class="hoja" id="dlg-perfil" aria-labelledby="perfil-titulo">
+      <form class="hoja-cuerpo perfil" id="form-perfil" novalidate>
+        <button class="cerrar" type="button" data-cerrar aria-label="Cerrar">×</button>
+        <p class="eyebrow" id="perfil-eyebrow">Antes de tu primera chela</p>
+        <h2 id="perfil-titulo">¿Cómo te conocen en el grupo?</h2>
+
+        <label class="campo">
+          <span>Tu nombre chelero</span>
+          <input id="perfil-nombre" type="text" maxlength="20" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="Ej. ElPepe" required />
+          <small id="perfil-nombre-estado">3 a 20 letras o números, sin espacios (se vale _ y .). Así te verán en el álbum y el ranking.</small>
+        </label>
+
+        <label class="campo">
+          <span>Tu teléfono <em>(opcional)</em></span>
+          <input id="perfil-tel" type="tel" inputmode="numeric" pattern="[0-9]*" autocomplete="tel-national" placeholder="10 dígitos" />
+          <small>Solo números, 10 dígitos. No se muestra en la app.</small>
+        </label>
+
+        <p class="nota">Al continuar aceptas el <a href="/privacidad" target="_blank" rel="noopener">aviso de privacidad</a>.</p>
+        <p class="error" id="perfil-error" role="alert"></p>
+
+        <button class="boton" id="perfil-guardar" type="submit">Guardar</button>
+        <button class="boton" id="perfil-foto" type="button" hidden>📸 Tomar la foto</button>
+        <button class="boton-peligro" id="perfil-borrar" type="button" hidden>Borrar mis datos</button>
+      </form>
+    </dialog>
+
+    <!-- Guía para instalar la app según dispositivo (pwa.ts). -->
+    <dialog class="hoja" id="dlg-instalar" aria-labelledby="instalar-guia-titulo">
+      <div class="hoja-cuerpo guia">
+        <button class="cerrar" type="button" data-cerrar aria-label="Cerrar">×</button>
+        <p class="eyebrow">Como app, sin tienda</p>
+        <h2 id="instalar-guia-titulo">Instala Millón de Chelas</h2>
+        <p class="nota" id="guia-instalada" hidden>✓ Ya la estás usando como app.</p>
+        <p class="guia-detectado" id="guia-detectado"></p>
+        <button class="boton" id="instalar-ya" type="button" hidden>Instalar ahora</button>
+        <div class="segmentos" role="group" aria-label="Dispositivo">
+          <button type="button" data-plataforma="iphone" aria-pressed="false">iPhone</button>
+          <button type="button" data-plataforma="android" aria-pressed="false">Android</button>
+          <button type="button" data-plataforma="compu" aria-pressed="false">Compu</button>
+        </div>
+        <div class="guia-navegadores" id="guia-navegadores" role="group" aria-label="Navegador"></div>
+        <ol class="guia-pasos" id="guia-pasos"></ol>
+        <p class="nota guia-nota" id="guia-nota"></p>
+        <button class="boton-sec" type="button" data-cerrar>Listo</button>
+      </div>
+    </dialog>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

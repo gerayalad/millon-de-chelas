@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f3eddf"/>
+  <g transform="translate(80 70) scale(0.19)"><g transform="translate(256 262) scale(1.0) rotate(-5)">
+    <rect x="-140" y="-146" width="280" height="292" rx="22" fill="#ef713d" stroke="#222720" stroke-width="14"/>
+    <text x="0" y="78" text-anchor="middle" font-family="Helvetica Neue" font-weight="800" font-size="236" fill="#222720">M</text>
+    <g transform="translate(134 -142)">
+      <circle r="44" fill="#f3eddf"/>
+      <g stroke="#222720" stroke-width="10" stroke-linecap="round">
+        <path d="M0 -30V30M-30 0H30M-21 -21L21 21M-21 21L21 -21"/>
+      </g>
+    </g>
+  </g></g>
+  <text x="182" y="108" font-family="Helvetica Neue" font-weight="800" font-size="30" fill="#222720">Millón de Chelas<tspan fill="#bc491f">.</tspan></text>
+  <text x="80" y="232" font-family="Helvetica Neue" font-weight="700" font-size="22" letter-spacing="4" fill="#222720">UN GRUPO. UNA MISIÓN.</text>
+  <text x="74" y="340" font-family="Helvetica Neue" font-weight="800" font-size="104" letter-spacing="-4" fill="#222720">Un millón.</text>
+  <text x="74" y="448" font-family="Helvetica Neue" font-weight="800" font-size="104" letter-spacing="-4" fill="#bd4b24">Entre todos.</text>
+  <text x="80" y="520" font-family="Helvetica Neue" font-weight="500" font-size="30" fill="#64675a">Cada chela tiene su número. Sube la tuya.</text>
+  <g transform="translate(760 120) scale(1.65)" fill="none">
+  <g stroke="#222720" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m110 19 5 14m24-18-5 16m25 0-14 9M21 87l-10-6m204 40 13-4"/>
+    <path d="M53 204c28 8 110 10 146-1" opacity=".18"/>
+    <g transform="rotate(-15 77 124)">
+      <path d="M105 82h13q17 0 17 18v27q0 18-19 18h-11v-17h9q5 0 5-5v-20q0-5-5-5h-9" fill="#f3eddf"/>
+      <path d="M38 75h70v87q0 16-15 16H53q-15 0-15-16Z" fill="#ef713d"/>
+      <path d="M50 102v51m46-51v51" stroke="#faac66" stroke-width="7"/>
+      <path d="M37 83q-15-2-12-15 1-9 12-11-1-14 13-15 10-8 22 2 15-9 24 5 18-1 19 14 11 15-7 21H88v13q-1 10-10 8-7-1-7-9V83Z" fill="#fffaf0"/>
+      <path d="M59 117v5m25-5v5m-24 16q12 12 23-1"/>
+      <path d="m56 179-4 15-12 2m49-17 7 17 12 1"/>
+    </g>
+    <g transform="rotate(16 163 112)">
+      <path d="M131 74h-12q-15 0-15 17v24q0 17 17 17h10v-15h-7q-5 0-5-6V96q0-6 5-6h7" fill="#f3eddf"/>
+      <path d="M129 67h63v85q0 14-14 14h-35q-14 0-14-14Z" fill="#edab35"/>
+      <path d="M140 93v48m40-48v48" stroke="#f8d27b" stroke-width="6"/>
+      <path d="M128 76q-13-5-10-16 2-9 13-10 1-14 15-14 10-7 21 3 17-7 23 8 16 0 16 14 5 16-14 16h-12v9q0 10-9 9-7-1-7-9V76Z" fill="#fffaf0"/>
+      <path d="m146 108 5-3m19 2 5 3m-27 15q12 10 23-1"/>
+      <path d="m145 167-6 18-12 1m43-19 7 16 12-1"/>
+    </g>
+    <path d="m25 151-8 6 6 9m191-98 8-6-5-8" stroke-width="3"/>
+  </g>
+  <g fill="#ef713d"><path d="m28 29 3 8 8 3-8 3-3 8-3-8-8-3 8-3ZM211 161l3 8 8 3-8 3-3 8-3-8-8-3 8-3Z"/></g>
+</g>
+</svg>

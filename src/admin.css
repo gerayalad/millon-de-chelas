@@ -1,0 +1,340 @@
+/* Panel de admin: mismo cartel que la app (tokens en styles.css). */
+
+.admin-pagina .marca {
+  color: inherit;
+  text-decoration: none;
+}
+
+.admin-etiqueta {
+  margin-left: auto;
+  padding: 5px 9px;
+  border: 1px solid var(--text);
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ───────── PIN */
+
+.pin {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  max-width: 360px;
+  margin: 0 auto;
+  padding: 28px var(--gutter) calc(env(safe-area-inset-bottom) + 32px);
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+
+.pin h1 {
+  margin: 0;
+  font: 800 36px/1 var(--display);
+  letter-spacing: -0.05em;
+}
+
+.pin-puntos {
+  display: flex;
+  gap: 14px;
+  margin: 8px 0 4px;
+}
+
+.pin-puntos span {
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--text);
+  border-radius: 50%;
+  transition: background 0.15s;
+}
+
+.pin-puntos span.lleno {
+  background: var(--amber);
+}
+
+.pin-puntos.sacude {
+  animation: sacude 0.4s;
+}
+
+@keyframes sacude {
+  20%,
+  60% {
+    transform: translateX(-8px);
+  }
+  40%,
+  80% {
+    transform: translateX(8px);
+  }
+}
+
+/* Captura el teclado físico sin verse. */
+.pin-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.teclado {
+  display: grid;
+  grid-template-columns: repeat(3, 76px);
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.teclado button {
+  height: 64px;
+  border: 1.5px solid var(--text);
+  border-radius: 10px;
+  background: var(--bg-2);
+  box-shadow: 0 4px 0 var(--text);
+  font: 800 26px var(--display);
+}
+
+.teclado button:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--text);
+}
+
+/* ───────── panel */
+
+.panel {
+  padding-bottom: calc(env(safe-area-inset-bottom) + 40px);
+}
+
+.resumen {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  padding-top: 20px;
+  margin-bottom: 26px;
+  border-top: 1px solid var(--line);
+}
+
+.resumen-caja {
+  display: grid;
+  gap: 2px;
+  padding: 14px 10px;
+  border: 1.5px solid var(--text);
+  border-radius: 10px;
+  background: var(--bg-2);
+  box-shadow: 0 4px 0 var(--text);
+  text-align: left;
+}
+
+.resumen-caja b {
+  font: 800 30px/1 var(--display);
+  letter-spacing: -0.04em;
+}
+
+.resumen-caja span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.resumen-caja[aria-pressed='true'] {
+  background: var(--text);
+  color: var(--foam);
+}
+
+.resumen-caja[aria-pressed='true'] span {
+  color: #c7c9b8;
+}
+
+.resumen-caja[data-vista='por_revisar'] b {
+  color: #a03c1d;
+}
+
+.resumen-caja[aria-pressed='true'][data-vista='por_revisar'] b {
+  color: var(--gold);
+}
+
+.vista-nota {
+  margin: 6px 0 18px;
+  text-align: left;
+}
+
+.cola {
+  display: grid;
+  gap: 14px;
+}
+
+@media (min-width: 760px) {
+  .cola {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.caso {
+  display: grid;
+  grid-template-columns: 116px 1fr;
+  gap: 14px;
+  padding: 12px;
+  border: 1.5px solid var(--text);
+  border-radius: 12px;
+  background: var(--bg-2);
+  box-shadow: 0 4px 0 var(--text);
+  transition:
+    opacity 0.3s,
+    transform 0.3s;
+}
+
+.caso.saliendo {
+  opacity: 0;
+  transform: scale(0.96);
+}
+
+.caso-foto {
+  position: relative;
+  align-self: start;
+  aspect-ratio: 4 / 5;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--card);
+}
+
+.caso-foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.caso[data-estado='rechazada'] .caso-foto img {
+  filter: grayscale(0.7);
+}
+
+.caso-foto .foto-num {
+  top: 6px;
+  left: 6px;
+  font-size: 11px;
+}
+
+.caso-cuerpo {
+  display: grid;
+  align-content: start;
+  gap: 7px;
+  min-width: 0;
+}
+
+.caso-cabeza {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.caso-cabeza b {
+  overflow: hidden;
+  font: 800 17px var(--display);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.caso-cabeza small,
+.caso-quien {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.caso-declarado,
+.caso-resumen,
+.caso-marca,
+.caso-motivo {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.caso-declarado {
+  font-weight: 700;
+}
+
+.caso-resumen {
+  color: var(--muted);
+}
+
+.caso-marca {
+  color: #a03c1d;
+  font-weight: 700;
+}
+
+.caso-motivo {
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: #eee7d8;
+}
+
+.medidores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.medidor {
+  padding: 3px 7px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.medidor[data-nivel='alto'] {
+  border-color: #4e6b37;
+  color: #3c5529;
+  background: #e3ecd3;
+}
+
+.medidor[data-nivel='medio'] {
+  border-color: #c98a1d;
+  color: #7a5310;
+  background: #f6e7c4;
+}
+
+.medidor[data-nivel='bajo'] {
+  border-color: var(--danger);
+  color: var(--danger);
+  background: #f5dcd5;
+}
+
+.caso-acciones {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.caso-acciones button {
+  flex: 1;
+  padding: 11px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.caso-acciones .boton {
+  border: 1.5px solid var(--text);
+  box-shadow: 0 3px 0 var(--text);
+}
+
+@media (max-width: 380px) {
+  .caso {
+    grid-template-columns: 92px 1fr;
+  }
+}
+
+.ajustar {
+  margin-top: 30px;
+}

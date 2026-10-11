@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f3eddf" />
+    <meta name="color-scheme" content="light" />
+    <meta name="robots" content="noindex" />
+    <title>Admin · Millón de Chelas</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap"
+    />
+    <link rel="stylesheet" href="/src/styles.css" />
+    <link rel="stylesheet" href="/src/admin.css" />
+  </head>
+  <body class="admin-pagina">
+    <header class="top">
+      <a class="marca" href="/"><span class="marca-icono" aria-hidden="true">M<span>✳</span></span><span>Millón<br />de Chelas<span class="marca-punto">.</span></span></a>
+      <span class="admin-etiqueta">Panel de admin</span>
+      <button class="icono" id="salir" type="button" aria-label="Salir del panel" hidden>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 17l-5-5 5-5M5 12h11" /></svg>
+      </button>
+    </header>
+
+    <!-- Entrada con PIN -->
+    <main class="pin" id="pantalla-pin">
+      <p class="eyebrow">Solo admins</p>
+      <h1>Escribe el PIN</h1>
+      <div class="pin-puntos" id="pin-puntos" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      <label class="sr-only" for="pin-input">PIN de 6 dígitos</label>
+      <input class="pin-input" id="pin-input" type="password" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]*" />
+      <p class="error" id="pin-error" role="alert"></p>
+      <div class="teclado" id="teclado">
+        <button type="button" data-d="1">1</button><button type="button" data-d="2">2</button><button type="button" data-d="3">3</button>
+        <button type="button" data-d="4">4</button><button type="button" data-d="5">5</button><button type="button" data-d="6">6</button>
+        <button type="button" data-d="7">7</button><button type="button" data-d="8">8</button><button type="button" data-d="9">9</button>
+        <span></span><button type="button" data-d="0">0</button><button type="button" id="pin-borrar" aria-label="Borrar">⌫</button>
+      </div>
+    </main>
+
+    <!-- Panel -->
+    <main class="app panel" id="pantalla-panel" hidden>
+      <section class="resumen" aria-label="Resumen">
+        <button type="button" class="resumen-caja" data-vista="por_revisar" aria-pressed="true"><b id="n-por-revisar">—</b><span>Por revisar</span></button>
+        <button type="button" class="resumen-caja" data-vista="rechazada" aria-pressed="false"><b id="n-rechazada">—</b><span>Rechazadas</span></button>
+        <button type="button" class="resumen-caja" data-vista="aprobada" aria-pressed="false"><b id="n-aprobada">—</b><span>Aprobadas</span></button>
+      </section>
+
+      <div class="comunidad-cabecera">
+        <h2 id="vista-titulo">Por revisar<span>.</span></h2>
+        <button class="enlace" id="refrescar" type="button">Actualizar <span aria-hidden="true">↻</span></button>
+      </div>
+      <p class="nota vista-nota" id="vista-nota"></p>
+
+      <div class="cola" id="cola"></div>
+      <p class="vacio" id="cola-vacia" hidden>Nada por aquí. 🍻</p>
+      <button class="boton-sec mas" id="cola-mas" type="button" hidden>Ver más</button>
+
+      <details class="admin ajustar">
+        <summary>Ajustar el conteo total</summary>
+        <form class="en-linea" id="form-ajustar">
+          <input id="ajustar-total" type="number" inputmode="numeric" min="0" placeholder="Ej. 9,450" />
+          <button class="boton-chico" type="submit">Ajustar</button>
+        </form>
+        <p class="nota">Para empatar con el conteo del grupo de WhatsApp. Cambia el marcador para todos.</p>
+      </details>
+    </main>
+
+    <dialog class="hoja" id="dlg-ver" aria-label="Foto completa">
+      <div class="hoja-cuerpo detalle">
+        <button class="cerrar" type="button" data-cerrar aria-label="Cerrar">×</button>
+        <img class="detalle-img" id="ver-img" alt="" />
+      </div>
+    </dialog>
+
+    <div class="toasts" id="toasts" aria-live="polite"></div>
+
+    <script type="module" src="/src/admin.ts"></script>
+  </body>
+</html>

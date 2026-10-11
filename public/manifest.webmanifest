@@ -1,0 +1,19 @@
+{
+  "id": "/",
+  "name": "Millón de Chelas",
+  "short_name": "Chelas",
+  "description": "Un millón de chelas, entre todos. Sube la foto de tu chela y súmala al conteo.",
+  "lang": "es-MX",
+  "start_url": "/?app=1",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f3eddf",
+  "theme_color": "#f3eddf",
+  "related_applications": [{ "platform": "webapp", "url": "https://chela.happytohelp.mx/manifest.webmanifest" }],
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
