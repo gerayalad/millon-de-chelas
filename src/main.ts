@@ -693,12 +693,10 @@ async function revisarMiChela(c: Chela, foto: Blob): Promise<void> {
   mostrarResultado(r ?? c, foto);
 }
 
-/** Estado actual de una foto propia: aprobada (visible para todos) o entre mis revisiones. */
+/** Estado actual de una foto propia (o el recibo, si la IA la descartó). */
 async function consultar(id: number): Promise<Chela | null> {
   try {
-    const aprobada = await api.leerChela(id);
-    if (aprobada) return aprobada;
-    return (await api.misRevisiones(secreto())).find((x) => x.id === id) ?? null;
+    return await api.miChela(id, secreto());
   } catch {
     return null;
   }

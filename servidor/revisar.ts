@@ -3,6 +3,7 @@
 // Si algo falla, la foto sigue 'pendiente' y el cron la reintenta (máximo 3 intentos; luego
 // pasa a revisión del admin).
 
+import type { Entorno } from './entorno';
 import { preguntarJev, type Veredicto } from './jev';
 import { borrarFotos, descargarFoto, fila, rpc, type Chela } from './supabase';
 import { verFoto, type Vision } from './vision';
@@ -27,7 +28,7 @@ export function decidir(vision: Vision, v: Veredicto, u: Umbrales): { decision: 
   return { decision: 'aprobada', motivo: null };
 }
 
-function config(env: Env) {
+function config(env: Entorno) {
   return {
     sb: { url: env.SUPABASE_URL, key: env.SUPABASE_KEY },
     vision: { apiKey: env.OPENROUTER_API_KEY, model: env.OPENROUTER_MODEL, siteUrl: env.SITE_URL },
@@ -37,7 +38,7 @@ function config(env: Env) {
 }
 
 /** null = no le tocaba (ya la tomó otro intento o ya se decidió) o falló y queda para el cron. */
-export async function revisar(id: number, env: Env): Promise<Chela | null> {
+export async function revisar(id: number, env: Entorno): Promise<Chela | null> {
   const c = config(env);
   const tomada = fila(await rpc<Chela | null>(c.sb, 'ia_tomar', { p_clave: env.SERVER_KEY, p_id: id }));
   if (!tomada) return null;
@@ -77,8 +78,8 @@ export async function revisar(id: number, env: Env): Promise<Chela | null> {
   }
 }
 
-/** Cron: lo que quedó pendiente (el cliente se fue antes, o falló la IA). */
-export async function revisarPendientes(env: Env): Promise<void> {
+/** Cron: lo que quedó pendiente (el cliente se fue antes, o falló la IA). En paralelo (hasta 10). */
+export async function revisarPendientes(env: Entorno): Promise<void> {
   const ids = await rpc<number[]>(config(env).sb, 'ia_pendientes', { p_clave: env.SERVER_KEY });
-  for (const id of ids) await revisar(id, env);
+  await Promise.all(ids.map((id) => revisar(id, env)));
 }

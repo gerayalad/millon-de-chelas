@@ -115,13 +115,6 @@ export async function leerChelas(antesDe?: number, limite = 24): Promise<Chela[]
   return (data ?? []) as Chela[];
 }
 
-/** Una aprobada por id (null si no existe o no está aprobada). */
-export async function leerChela(id: number): Promise<Chela | null> {
-  const { data, error } = await supabase.from('chelas').select('*').eq('id', id).maybeSingle();
-  if (error) throw new ErrorApi(mensaje(error));
-  return fila(data as Chela | null);
-}
-
 /** De las que tengo en pantalla, cuáles siguen aprobadas (un admin pudo denegar alguna). */
 export async function siguenAprobadas(ids: number[]): Promise<Set<number>> {
   if (ids.length === 0) return new Set();
@@ -200,6 +193,13 @@ export async function revisar(id: number): Promise<Chela | null> {
   } catch {
     return null;
   }
+}
+
+/** Una foto propia en cualquier estado; si la IA la descartó (no se guarda), su recibo de 30 min. */
+export async function miChela(id: number, secreto: string): Promise<Chela | null> {
+  const { data, error } = await supabase.rpc('mi_chela', { p_id: id, p_secreto: secreto });
+  if (error) throw new ErrorApi(mensaje(error));
+  return fila(data as Chela | null);
 }
 
 /** Mis fotos recientes que no salen en el feed: pendientes, en revisión o rechazadas. */

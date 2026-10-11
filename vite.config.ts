@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  // /api (revisión con IA) va a `npm run dev:api` (wrangler dev en el 8787).
-  server: { host: true, proxy: { '/api': 'http://127.0.0.1:8787' } },
+  // Con /api (funciones): `npm run dev:netlify` (netlify dev, en el 8888, levanta Vite y las funciones).
+  server: { host: true },
   build: {
     target: 'es2022',
     assetsInlineLimit: 0,

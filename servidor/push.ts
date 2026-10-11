@@ -2,6 +2,7 @@
 // Se mandan SIN payload: el service worker (public/sw.js), al recibir el push, pide el texto a
 // /api/aviso. Así no hay que cifrar el mensaje (RFC 8291); solo firmar VAPID (RFC 8292, ES256).
 
+import type { Entorno } from './entorno';
 import { rpc, type SupabaseConfig } from './supabase';
 
 const enc = new TextEncoder();
@@ -24,7 +25,7 @@ async function llavePrivada(jwk: string): Promise<CryptoKey> {
 }
 
 /** JWT VAPID para el servicio de push de `audiencia` (su origen), válido 12 h. */
-async function jwtVapid(audiencia: string, env: Env): Promise<string> {
+async function jwtVapid(audiencia: string, env: Entorno): Promise<string> {
   const cabeza = b64url(JSON.stringify({ typ: 'JWT', alg: 'ES256' }));
   const datos = b64url(
     JSON.stringify({ aud: audiencia, exp: Math.floor(Date.now() / 1000) + 12 * 3600, sub: 'mailto:hola@happytohelp.mx' }),
@@ -35,7 +36,7 @@ async function jwtVapid(audiencia: string, env: Env): Promise<string> {
 }
 
 /** Manda un push vacío a cada endpoint. Regresa los que el servicio dio por muertos (404/410). */
-export async function enviarPush(endpoints: string[], env: Env): Promise<{ enviados: number; bajas: string[] }> {
+export async function enviarPush(endpoints: string[], env: Entorno): Promise<{ enviados: number; bajas: string[] }> {
   const jwts = new Map<string, Promise<string>>();
   const bajas: string[] = [];
   let enviados = 0;
@@ -66,7 +67,7 @@ export async function enviarPush(endpoints: string[], env: Env): Promise<{ envia
 }
 
 /** Cron: si el marcador cruzó un nuevo millar, avisa a todos los suscritos. */
-export async function avisarHito(env: Env): Promise<void> {
+export async function avisarHito(env: Entorno): Promise<void> {
   const sb: SupabaseConfig = { url: env.SUPABASE_URL, key: env.SUPABASE_KEY };
   const r = await rpc<{ hito: number; total: number; endpoints: string[] } | null>(sb, 'push_hito', { p_clave: env.SERVER_KEY });
   if (!r || r.endpoints.length === 0) return;
@@ -78,7 +79,7 @@ export async function avisarHito(env: Env): Promise<void> {
 const NUM = new Intl.NumberFormat('es-MX');
 
 /** Texto del aviso (lo pide el service worker al recibir el push). */
-export async function textoAviso(env: Env): Promise<{ title: string; body: string; url: string }> {
+export async function textoAviso(env: Entorno): Promise<{ title: string; body: string; url: string }> {
   const res = await fetch(`${env.SUPABASE_URL}/rest/v1/marcador?id=eq.1&select=total,meta`, {
     headers: { apikey: env.SUPABASE_KEY },
   });
